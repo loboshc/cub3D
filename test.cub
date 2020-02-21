@@ -1,10 +1,10 @@
 R 1000 1000
-NO ./pics/redbrick.png
-SO ./pics/greystone.png
-WE ./pics/wood.png
-EA ./pics/mossy.png
+NO ./textures/wood.XPM
+SO ./textures/redbrick.XPM
+WE ./textures/bluestone.XPM
+EA ./textures/greystone.XPM
 
-S ./pics/barrel.png
+S ./textures/barrel.XPM
 F 0,0,0
 C 255,255,255
 

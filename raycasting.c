@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 20:46:32 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/20 20:53:12 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/21 19:19:27 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,16 @@ void	calculate_pixel(t_mlx *mlx)
 
 void	draw_all(t_mlx *mlx, int x)
 {
+	int n;
+
+	n = 0;
 	calculate_pixel(mlx);
+	while(n < mlx->drawStar)
+	{
+		mlx->addr_img[4 * (x + n * mlx->s_width)] = (char)mlx->sky.b;
+		mlx->addr_img[4 * (x + n * mlx->s_width) + 1] = (char)mlx->sky.g;
+		mlx->addr_img[4 * (x + n++ * mlx->s_width) + 2] = (char)mlx->sky.r;
+	}
 	while (mlx->drawStar < mlx->drawEnd)
 	{
 		if (mlx->side == 0)
@@ -99,6 +108,12 @@ void	draw_all(t_mlx *mlx, int x)
 				mlx->s_width)] = (char)255;
 		}
 		mlx->drawStar++;
+	}
+	while (mlx->drawEnd < mlx->s_height)
+	{
+		mlx->addr_img[4 * (x + mlx->drawEnd * mlx->s_width)] = (char)mlx->floor.b;
+		mlx->addr_img[4 * (x + mlx->drawEnd * mlx->s_width) + 1] = (char)mlx->floor.g;
+		mlx->addr_img[4 * (x + mlx->drawEnd++ * mlx->s_width) + 2] = (char)mlx->floor.r;
 	}
 }
 
@@ -127,6 +142,5 @@ int		ft_raycasting(t_mlx *mlx)
 		x++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_window, mlx->img, 0, 0);
-	mlx_destroy_image(mlx->mlx, mlx->img);
 	return (0);
 }

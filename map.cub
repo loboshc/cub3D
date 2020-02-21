@@ -1,12 +1,12 @@
 R 1000 500
-NO ./path_north
-SO ./path_south
-WE ./path_west
-EA ./path_east
+NO ./textures/wood.XPM
+SO ./textures/redbrick.XPM
+WE ./textures/bluestone.XPM
+EA ./textures/greystone.XPM
 
-S ./path_sprite.
-F 220,100,0
-C 255,30,0
+S ./textures/barrel.XPM
+F 0,0,0
+C 0,142,200
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1

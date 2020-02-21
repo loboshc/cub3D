@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/20 20:53:15 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/21 19:07:50 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@
 # include "libft/libft.h"
 # include "sys/stat.h"
 # include <math.h>
-# define MV_SPEED 0.099
+# define MV_SPEED 0.049
 # define ROT_SPEED 0.0745
-# define M_KEY_PRESS (1L<<0)
-# define M_KEY_RELEASE (1L<<1)
+# define KEY_ESC 53
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 # define KEY_W 13
@@ -45,6 +44,32 @@ typedef struct s_player
     double planoX;//para los calculos en 2d
     double planoY;//para los calculos en 2d
 }				t_player;
+
+typedef struct s_floor
+{
+    int r;
+    int g;
+    int b;
+}               t_floor;
+
+typedef struct s_sky
+{
+    int r;
+    int g;
+    int b;
+}               t_sky;
+
+typedef struct s_text
+{
+    void    *img_ptr;
+    char    *addr;
+    int     bpp;
+    int     size;
+    int     endi;
+    int     height;
+    int     width;
+}               t_text;
+
 typedef struct s_mlx
 {
     int     fd;
@@ -84,7 +109,19 @@ typedef struct s_mlx
     int move_d;
     int move_rl;
     int move_rr;
+
+    char    *path_north;
+    char    *path_south;
+    char    *path_west;
+    char    *path_east;
+    char    *path_sprite;
     t_player player;
+    t_floor  floor;
+    t_sky    sky;
+    t_text   textno;
+    t_text   textso;
+    t_text   textwe;
+    t_text   textea;
 }              t_mlx;
 
 void	get_info_map(char *line, t_mlx *mlx, int lastline);
@@ -93,5 +130,10 @@ void	free_and_null(void *obj);
 void	init_player(char *buf, t_mlx *mlx, int *x, int y);
 int     ft_raycasting(t_mlx *mlx);
 void	move_handler(t_mlx *mlx);
+void	get_color_f(t_mlx *mlx, char *line);
+void	get_color_s(t_mlx *mlx, char *line);
+void	get_textures(t_mlx *mlx, char *line);
+void	get_sprite(t_mlx *mlx, char *line);
+void	textures(t_mlx *mlx);
 
 #endif

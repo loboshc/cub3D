@@ -1,6 +1,6 @@
 NAME = cub3d
 
-SRC = main.c init_player.c map.c utils.c raycasting.c move.c
+SRC = main.c init_player.c map.c utils.c raycasting.c move.c get_info.c get_textures.c textures.c
 
 FLAGS = -lmlx -framework OpenGL -framework AppKit
 

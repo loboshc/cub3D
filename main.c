@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/20 20:53:07 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/21 19:00:14 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	get_info(char *argv, t_mlx *mlx)
 		if (*line == 'R')
 			get_resolution(line, mlx);
 		else if (*line == 'N' || *line == 'S'|| *line == 'W' || *line == 'E')
-		{}
+			get_textures(mlx, line);
 		else if (*line == 'F')
-		{}
+			get_color_f(mlx, line);
 		else if (*line == 'C')
-		{}
+			get_color_s(mlx, line);
 		else if (*line == '1')
 			get_info_map(line, mlx, lastline);
 		else if (ft_isdigit(*line))
@@ -112,11 +112,16 @@ void	init_values(t_mlx *mlx)
 	mlx->move_rl = 0;
 	mlx->m_height = 0;
 	mlx->m_width = 0;
+	mlx->path_north = NULL;
+	mlx->path_south = NULL;
+	mlx->path_east = NULL;
+	mlx->path_west = NULL;
+	mlx->path_sprite = NULL;
 }
 
 int		key_pressed(int key, t_mlx *mlx)
 {
-	if (key == 53)
+	if (key == KEY_ESC)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->mlx_window);
 		exit(0);
@@ -160,9 +165,10 @@ int		main(int argc, char **argv)
 	init_values(&mlx);
 	get_info(argv[1], &mlx);
 	init_mlx(&mlx);
+	textures(&mlx);
 	mlx_loop_hook(mlx.mlx, ft_raycasting , &mlx);
-	mlx_hook(mlx.mlx_window, KEY_PRESS, M_KEY_PRESS, key_pressed, (void*)&mlx);
-	mlx_hook(mlx.mlx_window, KEY_RELEASE, M_KEY_RELEASE, key_release, (void*)&mlx);
+	mlx_hook(mlx.mlx_window, KEY_PRESS, (1L<<0), key_pressed, (void*)&mlx);
+	mlx_hook(mlx.mlx_window, KEY_RELEASE, (1L<<1), key_release, (void*)&mlx);
 	mlx_loop(mlx.mlx);
 	return(0);
 }
