@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/21 19:07:50 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/24 20:01:10 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "libft/libft.h"
 # include "sys/stat.h"
 # include <math.h>
-# define MV_SPEED 0.049
-# define ROT_SPEED 0.0745
+//# define MV_SPEED 0.039
+# define ROT_SPEED 0.0445
 # define KEY_ESC 53
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
@@ -109,6 +109,7 @@ typedef struct s_mlx
     int move_d;
     int move_rl;
     int move_rr;
+    double move_speed;
 
     char    *path_north;
     char    *path_south;

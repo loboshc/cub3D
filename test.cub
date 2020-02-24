@@ -6,7 +6,7 @@ EA ./textures/greystone.XPM
 
 S ./textures/barrel.XPM
 F 0,0,0
-C 255,255,255
+C 0,142,200
 
 
 111111111111111111111111

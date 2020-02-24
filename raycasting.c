@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 20:46:32 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/21 19:19:27 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/24 18:19:37 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,6 @@ int		ft_raycasting(t_mlx *mlx)
 		x++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_window, mlx->img, 0, 0);
+	mlx_destroy_image(mlx->mlx, mlx->img);
 	return (0);
 }

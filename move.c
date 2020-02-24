@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 17:08:58 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/20 21:02:20 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/24 20:00:09 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	move_sides(t_mlx *mlx)
 	if (mlx->move_a)
 	{
 		if (mlx->map[(int)(mlx->player.posY - mlx->player.planoY * 0.5)][(int)mlx->player.posX] == 0)
-			mlx->player.posY -= mlx->player.planoY * MV_SPEED;
+			mlx->player.posY -= mlx->player.planoY * mlx->move_speed;
 		if (mlx->map[(int)mlx->player.posY][(int)(mlx->player.posX - mlx->player.planoX * 0.5)] == 0)
-			mlx->player.posX -= mlx->player.planoX * MV_SPEED;
+			mlx->player.posX -= mlx->player.planoX * mlx->move_speed;
 	}
 	if (mlx->move_d)
 	{
 		if (mlx->map[(int)(mlx->player.posY + mlx->player.planoY * 0.5)][(int)mlx->player.posX] == 0)
-			mlx->player.posY += mlx->player.planoY * MV_SPEED;
+			mlx->player.posY += mlx->player.planoY * mlx->move_speed;
 		if (mlx->map[(int)mlx->player.posY][(int)(mlx->player.posX + mlx->player.planoX * 0.5)] == 0)
-			mlx->player.posX += mlx->player.planoX * MV_SPEED;
+			mlx->player.posX += mlx->player.planoX * mlx->move_speed;
 	}
 }
 
@@ -54,16 +54,16 @@ void	move_handler(t_mlx *mlx)
 	if (mlx->move_w)
 	{
 		if (mlx->map[(int)(mlx->player.posY + mlx->player.dirY * 0.5)][(int)mlx->player.posX] == 0)
-			mlx->player.posY += mlx->player.dirY * MV_SPEED;
+			mlx->player.posY += mlx->player.dirY * mlx->move_speed;
 		if (mlx->map[(int)mlx->player.posY][(int)(mlx->player.posX + mlx->player.dirX * 0.5)] == 0)
-			mlx->player.posX += mlx->player.dirX * MV_SPEED;
+			mlx->player.posX += mlx->player.dirX * mlx->move_speed;
 	}
 	if (mlx->move_s)
 	{
 		if (mlx->map[(int)(mlx->player.posY - mlx->player.dirY * 0.5)][(int)mlx->player.posX] == 0)
-			mlx->player.posY -= mlx->player.dirY * MV_SPEED;
+			mlx->player.posY -= mlx->player.dirY * mlx->move_speed;
 		if (mlx->map[(int)mlx->player.posY][(int)(mlx->player.posX - mlx->player.dirX * 0.5)] == 0)
-			mlx->player.posX -= mlx->player.dirX * MV_SPEED;
+			mlx->player.posX -= mlx->player.dirX * mlx->move_speed;
 	}
 	if (mlx->move_a || mlx->move_d)
 		move_sides(mlx);

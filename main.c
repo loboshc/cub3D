@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/21 19:00:14 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/24 20:04:20 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,14 @@ void	init_values(t_mlx *mlx)
 	mlx->path_east = NULL;
 	mlx->path_west = NULL;
 	mlx->path_sprite = NULL;
+	mlx->move_speed = 0.039;
 }
 
 int		key_pressed(int key, t_mlx *mlx)
 {
+	int h;
+
+	h = 0;
 	if (key == KEY_ESC)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->mlx_window);
@@ -138,6 +142,8 @@ int		key_pressed(int key, t_mlx *mlx)
 		mlx->move_a = 1;
 	if (key == KEY_D)
 		mlx->move_d = 1;
+	if (key == 257)
+		mlx->move_speed = 0.089;
 	return (0);
 }
 
@@ -155,7 +161,14 @@ int key_release(int key, t_mlx *mlx)
 		mlx->move_a = 0;
 	if (key == KEY_D)
 		mlx->move_d = 0;
+	if (key == 257)
+		mlx->move_speed = 0.039;
 	return (0);
+}
+
+int		exit_game(t_mlx *mlx)
+{
+	exit(EXIT_SUCCESS);
 }
 
 int		main(int argc, char **argv)
@@ -169,6 +182,7 @@ int		main(int argc, char **argv)
 	mlx_loop_hook(mlx.mlx, ft_raycasting , &mlx);
 	mlx_hook(mlx.mlx_window, KEY_PRESS, (1L<<0), key_pressed, (void*)&mlx);
 	mlx_hook(mlx.mlx_window, KEY_RELEASE, (1L<<1), key_release, (void*)&mlx);
+	mlx_hook(mlx.mlx_window, 17, 0, exit_game, (void*)&mlx);
 	mlx_loop(mlx.mlx);
 	return(0);
 }
