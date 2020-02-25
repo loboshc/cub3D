@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 20:46:32 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/24 18:19:37 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/25 21:38:04 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,8 @@ void	calculate_pixel(t_mlx *mlx)
 		mlx->drawEnd = mlx->s_height - 1;
 }
 
-void	draw_all(t_mlx *mlx, int x)
+void	draw_colors(t_mlx *mlx, int x)
 {
-	int n;
-
-	n = 0;
-	calculate_pixel(mlx);
-	while(n < mlx->drawStar)
-	{
-		mlx->addr_img[4 * (x + n * mlx->s_width)] = (char)mlx->sky.b;
-		mlx->addr_img[4 * (x + n * mlx->s_width) + 1] = (char)mlx->sky.g;
-		mlx->addr_img[4 * (x + n++ * mlx->s_width) + 2] = (char)mlx->sky.r;
-	}
 	while (mlx->drawStar < mlx->drawEnd)
 	{
 		if (mlx->side == 0)
@@ -109,6 +99,72 @@ void	draw_all(t_mlx *mlx, int x)
 		}
 		mlx->drawStar++;
 	}
+}
+
+void	select_texture(t_mlx *mlx)
+{
+	if (mlx->side == 1 && mlx->rayDirY > 0)
+	{
+		//east
+		mlx->step = 1.0 * mlx->textea.height / mlx->lineHeight;
+		mlx->texture = mlx->textea.addr;
+		mlx->text_x = mlx->textea.text_x;
+		mlx->size_line = mlx->textea.size;
+	}
+	else if (mlx->side == 1 && mlx->rayDirY < 0)
+	{
+		//west
+		mlx->step = 1.0 * mlx->textwe.height / mlx->lineHeight;
+		mlx->texture = mlx->textwe.addr;
+		mlx->text_x = mlx->textwe.text_x;
+		mlx->size_line = mlx->textwe.size;
+	}
+	else if (mlx->side == 0 && mlx->rayDirX > 0)
+	{
+		//sur
+		mlx->step = 1.0 * mlx->textso.height / mlx->lineHeight;
+		mlx->texture = mlx->textso.addr;
+		mlx->text_x = mlx->textso.text_x;
+		mlx->size_line = mlx->textso.size;
+	}
+	else
+	{
+		// norte
+		mlx->step = 1.0 * mlx->textno.height / mlx->lineHeight;
+		mlx->texture = mlx->textno.addr;
+		mlx->text_x = mlx->textno.text_x;
+		mlx->size_line = mlx->textno.size;
+	}
+	mlx->texPos = (mlx->drawStar - mlx->s_height / 2 + mlx->lineHeight / 2) * mlx->step;
+}
+
+void	draw_textures(t_mlx *mlx, int x)
+{
+	while (mlx->drawStar < mlx->drawEnd)
+	{
+		mlx->textY = (int)mlx->texPos & (64 - 1);
+		mlx->texPos += mlx->step;
+		mlx->color = mlx->texture[mlx->size_line / 4 * mlx->textY + mlx->text_x];
+		put_pixel(mlx, mlx->color, x);
+		mlx->drawStar++;
+	}
+}
+
+void	draw_all(t_mlx *mlx, int x)
+{
+	int n;
+
+	n = 0;
+	calculate_pixel(mlx);
+	select_texture(mlx);
+	while(n < mlx->drawStar)
+	{
+		mlx->addr_img[4 * (x + n * mlx->s_width)] = (char)mlx->sky.b;
+		mlx->addr_img[4 * (x + n * mlx->s_width) + 1] = (char)mlx->sky.g;
+		mlx->addr_img[4 * (x + n++ * mlx->s_width) + 2] = (char)mlx->sky.r;
+	}
+	//draw_colors(mlx, x);
+	draw_textures(mlx, x);
 	while (mlx->drawEnd < mlx->s_height)
 	{
 		mlx->addr_img[4 * (x + mlx->drawEnd * mlx->s_width)] = (char)mlx->floor.b;
@@ -138,6 +194,7 @@ int		ft_raycasting(t_mlx *mlx)
 		mlx->deltaDistY = (mlx->rayDirX == 0) ? 0 : ((mlx->rayDirY == 0) ? 1 : fabs(1 / mlx->rayDirY));
 		calculate_dda(mlx);
 		perform_dda(mlx);
+		calculate_textures(mlx);
 		draw_all(mlx, x);
 		x++;
 	}

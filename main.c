@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/24 20:04:20 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/25 21:38:00 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,16 @@ void 	init_mlx(t_mlx *mlx)
 	mlx->mlx_window = mlx_new_window(mlx->mlx, mlx->s_width, mlx->s_height, "CUB3D");
 }
 
+int		exit_game(t_mlx *mlx)
+{
+	free(mlx->path_west);
+	free(mlx->path_east);
+	free(mlx->path_north);
+	free(mlx->path_south);
+	mlx_destroy_window(mlx->mlx, mlx->mlx_window);
+	exit(EXIT_SUCCESS);
+}
+
 void	init_values(t_mlx *mlx)
 {
 	mlx->cameraX = 0;
@@ -126,10 +136,7 @@ int		key_pressed(int key, t_mlx *mlx)
 
 	h = 0;
 	if (key == KEY_ESC)
-	{
-		mlx_destroy_window(mlx->mlx, mlx->mlx_window);
-		exit(0);
-	}
+		exit_game(mlx);
 	if (key == KEY_W)
 		mlx->move_w = 1;
 	if (key == KEY_S)
@@ -164,11 +171,6 @@ int key_release(int key, t_mlx *mlx)
 	if (key == 257)
 		mlx->move_speed = 0.039;
 	return (0);
-}
-
-int		exit_game(t_mlx *mlx)
-{
-	exit(EXIT_SUCCESS);
 }
 
 int		main(int argc, char **argv)

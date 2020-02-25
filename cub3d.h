@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/24 20:01:10 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/25 21:37:56 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "libft/libft.h"
 # include "sys/stat.h"
 # include <math.h>
-//# define MV_SPEED 0.039
 # define ROT_SPEED 0.0445
 # define KEY_ESC 53
 # define KEY_PRESS 2
@@ -62,12 +61,15 @@ typedef struct s_sky
 typedef struct s_text
 {
     void    *img_ptr;
-    char    *addr;
+    int    *addr;
     int     bpp;
     int     size;
     int     endi;
     int     height;
     int     width;
+    double  wall;
+    int     text_y;
+    int     text_x;
 }               t_text;
 
 typedef struct s_mlx
@@ -111,6 +113,13 @@ typedef struct s_mlx
     int move_rr;
     double move_speed;
 
+    double step;
+    double texPos;
+    int text_x;
+    int *texture;
+    int textY;
+    int size_line;
+    int color;
     char    *path_north;
     char    *path_south;
     char    *path_west;
@@ -136,5 +145,7 @@ void	get_color_s(t_mlx *mlx, char *line);
 void	get_textures(t_mlx *mlx, char *line);
 void	get_sprite(t_mlx *mlx, char *line);
 void	textures(t_mlx *mlx);
+void	calculate_textures(t_mlx *mlx);
+void    put_pixel(t_mlx *mlx, int color, int x);
 
 #endif
