@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/25 21:38:00 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/26 20:08:48 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,11 @@ void	init_values(t_mlx *mlx)
 	mlx->path_west = NULL;
 	mlx->path_sprite = NULL;
 	mlx->move_speed = 0.039;
+	mlx->sprite_num = 0;
 }
 
 int		key_pressed(int key, t_mlx *mlx)
 {
-	int h;
-
-	h = 0;
 	if (key == KEY_ESC)
 		exit_game(mlx);
 	if (key == KEY_W)

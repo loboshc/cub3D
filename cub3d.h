@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/25 21:37:56 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/26 18:15:47 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 
+
+typedef struct s_sprite
+{
+    int x;
+    int y;
+}               t_sprite;
 
 typedef struct s_player
 {
@@ -112,7 +118,7 @@ typedef struct s_mlx
     int move_rl;
     int move_rr;
     double move_speed;
-
+    int sprite_num;
     double step;
     double texPos;
     int text_x;
@@ -132,6 +138,7 @@ typedef struct s_mlx
     t_text   textso;
     t_text   textwe;
     t_text   textea;
+    t_sprite *sprite;
 }              t_mlx;
 
 void	get_info_map(char *line, t_mlx *mlx, int lastline);

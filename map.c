@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:37:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/25 21:38:03 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/26 18:49:30 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,44 @@ static	void	check_error_map(char *line, t_mlx *mlx, int lastline)
 		error_exit("Error\nEl mapa tiene que estar rodeado por muros [1].");
 }
 
+void	get_info_sprites(t_mlx *mlx, char *buf)
+{
+	int x;
+	int y;
+	int p;
+	int sprite_num;
+
+	y = 0;
+	p = 0;
+	sprite_num = 0;
+	mlx->sprite = malloc(sizeof(t_sprite) * mlx->sprite_num);
+	while (y < mlx->m_height && sprite_num < mlx->sprite_num)
+	{
+		x = 0;
+		while (x < mlx->m_width && sprite_num < mlx->sprite_num)
+		{
+			if (buf[p] != ' ')
+			{
+				if (buf[p] == '2')
+				{
+					mlx->sprite[sprite_num].x = x;
+					mlx->sprite[sprite_num].y = y;
+					sprite_num++;
+				}
+				x++;
+			}
+			p++;
+		}
+		y++;
+	}
+}
+
 static	void	fill_map(t_mlx *mlx, char *buf)
 {
 	int x;
 	int y;
 	int p;
 
-	x = 0;
 	y = 0;
 	p = 0;
 	while (y < mlx->m_height)
@@ -73,6 +104,8 @@ static	void	fill_map(t_mlx *mlx, char *buf)
 				init_player(&buf[p], mlx, &x, y);
 			else if (buf[p] != ' ')
 			{
+				if (buf[p] == '2')
+					mlx->sprite_num++;
 				mlx->map[y][x] = buf[p] - '0';
 				x++;
 			}
@@ -80,6 +113,8 @@ static	void	fill_map(t_mlx *mlx, char *buf)
 		}
 		y++;
 	}
+	get_info_sprites(mlx, buf);
+	//pintar el mapa en la consola BORRAR
 	y = 0;
 	while (y < mlx->m_height)
 	{
@@ -119,6 +154,7 @@ static	void	copy_map(char *line, t_mlx *mlx, int lastline)
 			i++;
 		}
 		fill_map(mlx, (char*)buf);
+		free_and_null((void*)buf);
 	}
 }
 
