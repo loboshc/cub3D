@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:52:02 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/25 21:38:05 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/27 16:44:22 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void    put_pixel(t_mlx *mlx, int color, int x)
     j = x * (mlx->bit / 8) + mlx->drawStar * mlx->size;
     while(i < (mlx->bit/ 8))
     {
-        mlx->addr_img[j + i] = (char)color;
+        mlx->addr_img[j + i] = color;
         color >>= 8;
         i++;
     }

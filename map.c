@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:37:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/26 18:49:30 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/02/27 16:50:03 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ static	void	fill_map(t_mlx *mlx, char *buf)
 		}
 		y++;
 	}
-	get_info_sprites(mlx, buf);
+	if (mlx->sprite_num > 0)
+		get_info_sprites(mlx, buf);
 	//pintar el mapa en la consola BORRAR
 	y = 0;
 	while (y < mlx->m_height)
@@ -136,8 +137,6 @@ static	void	copy_map(char *line, t_mlx *mlx, int lastline)
 	int			i;
 	int			h;
 
-	h = mlx->m_height;
-	i = 0;
 	if (buf == NULL)
 		buf = ft_strdup("");
 	temp = ft_strjoin(buf, line);
@@ -146,6 +145,7 @@ static	void	copy_map(char *line, t_mlx *mlx, int lastline)
 	if (lastline == 0)
 	{
 		i = 0;
+		h = mlx->m_height;
 		if ((mlx->map = (int**)ft_calloc(sizeof(int*) * h, 1)) == NULL)
 			error_exit("Error\nNo se ha podido reservar memeria para el mapa");
 		while (i < mlx->m_height)
