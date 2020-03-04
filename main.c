@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/26 20:08:48 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/04 21:48:48 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ int		main(int argc, char **argv)
 	check_args(argc, argv);
 	init_values(&mlx);
 	get_info(argv[1], &mlx);
+	mlx.zbuffer = (double*)malloc(sizeof(double) * mlx.s_width);
 	init_mlx(&mlx);
 	textures(&mlx);
 	mlx_loop_hook(mlx.mlx, ft_raycasting , &mlx);

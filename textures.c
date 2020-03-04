@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 18:48:54 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/25 21:38:01 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/04 21:48:51 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	textures(t_mlx *mlx)
 
 	mlx->textea.img_ptr = mlx_xpm_file_to_image(mlx->mlx, mlx->path_east, &mlx->textea.width, &mlx->textea.height);
 	mlx->textea.addr = (int*)mlx_get_data_addr(mlx->textea.img_ptr, &mlx->textea.bpp, &mlx->textea.size, &mlx->textea.endi);
+
+	mlx->textsp.img_ptr = mlx_xpm_file_to_image(mlx->mlx, mlx->path_sprite, &mlx->textsp.width, &mlx->textsp.height);
+	mlx->textsp.addr = (int*)mlx_get_data_addr(mlx->textsp.img_ptr, &mlx->textsp.bpp, &mlx->textsp.size, &mlx->textsp.endi);
+		
 }	
 
 void	calculate_texture_north(t_mlx *mlx)

@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:37:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/27 16:50:03 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/03 18:08:23 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	get_info_sprites(t_mlx *mlx, char *buf)
 	y = 0;
 	p = 0;
 	sprite_num = 0;
-	mlx->sprite = malloc(sizeof(t_sprite) * mlx->sprite_num);
+	mlx->sprite = malloc(sizeof(t_sprite) * (mlx->sprite_num));
 	while (y < mlx->m_height && sprite_num < mlx->sprite_num)
 	{
 		x = 0;
@@ -105,8 +105,12 @@ static	void	fill_map(t_mlx *mlx, char *buf)
 			else if (buf[p] != ' ')
 			{
 				if (buf[p] == '2')
+				{
 					mlx->sprite_num++;
-				mlx->map[y][x] = buf[p] - '0';
+					mlx->map[y][x] = 0;
+				}
+				else
+					mlx->map[y][x] = buf[p] - '0';
 				x++;
 			}
 			p++;
@@ -114,7 +118,10 @@ static	void	fill_map(t_mlx *mlx, char *buf)
 		y++;
 	}
 	if (mlx->sprite_num > 0)
+	{
+		//mlx->sprite_num++;
 		get_info_sprites(mlx, buf);
+	}
 	//pintar el mapa en la consola BORRAR
 	y = 0;
 	while (y < mlx->m_height)

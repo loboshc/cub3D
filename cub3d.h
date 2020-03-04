@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/26 18:15:47 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/03 21:22:18 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,27 @@ typedef struct s_text
     int     text_x;
 }               t_text;
 
+typedef struct  s_sprite_calc
+{
+    double  x;
+    double  y;
+    double	invdet;
+    double			transX;
+	double			transY;
+    int     screen_x;
+    int		height;
+    int     width;
+    int     drawstartx;
+    int     drawendx;
+    int     drawstarty;
+    int     drawendy;
+    int     textX;
+    int     textY;
+    int     d;
+    unsigned int color;
+
+}                t_sprite_calc;
+
 typedef struct s_mlx
 {
     int     fd;
@@ -110,7 +131,7 @@ typedef struct s_mlx
     int bit;
     int size;
     int e;
-    
+    double  *zbuffer;
     int move_w;
     int move_s;
     int move_a;
@@ -138,7 +159,10 @@ typedef struct s_mlx
     t_text   textso;
     t_text   textwe;
     t_text   textea;
+    t_text   textsp;
     t_sprite *sprite;
+    t_sprite *sprite_sorted;
+    t_sprite_calc sprite_calc;
 }              t_mlx;
 
 void	get_info_map(char *line, t_mlx *mlx, int lastline);
@@ -154,5 +178,7 @@ void	get_sprite(t_mlx *mlx, char *line);
 void	textures(t_mlx *mlx);
 void	calculate_textures(t_mlx *mlx);
 void    put_pixel(t_mlx *mlx, int color, int x);
+void	draw_sprites(t_mlx *mlx);
+void    put_pixel_sprite(t_mlx *mlx, int color, int x, int y);
 
 #endif

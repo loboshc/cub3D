@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 20:46:32 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/27 16:01:16 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/04 21:48:50 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	calculate_dda(t_mlx *mlx)
 	}
 }
 
-void	perform_dda(t_mlx *mlx)
+void	perform_dda(t_mlx *mlx, int x)
 {
 	mlx->hit = 0;
 	while (mlx->hit == 0)
@@ -63,6 +63,7 @@ void	perform_dda(t_mlx *mlx)
 		mlx->perpWallDist = (mlx->mapY - mlx->player.posY +
 		(1 - mlx->stepY) / 2) / mlx->rayDirY;
 	mlx->lineHeight = (int)(mlx->s_height / mlx->perpWallDist);
+	mlx->zbuffer[x] = mlx->perpWallDist;
 }
 
 void	calculate_pixel(t_mlx *mlx)
@@ -193,11 +194,12 @@ int		ft_raycasting(t_mlx *mlx)
 		mlx->deltaDistX = (mlx->rayDirY == 0) ? 0 : ((mlx->rayDirX == 0) ? 1 : fabs(1 / mlx->rayDirX));
 		mlx->deltaDistY = (mlx->rayDirX == 0) ? 0 : ((mlx->rayDirY == 0) ? 1 : fabs(1 / mlx->rayDirY));
 		calculate_dda(mlx);
-		perform_dda(mlx);
+		perform_dda(mlx, x);
 		calculate_textures(mlx);
 		draw_all(mlx, x);
 		x++;
 	}
+	draw_sprites(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_window, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx, mlx->img);
 	return (0);
