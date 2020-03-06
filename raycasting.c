@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 20:46:32 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/04 21:48:50 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/06 16:27:36 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	select_texture(t_mlx *mlx)
 {
 	if (mlx->side == 1 && mlx->rayDirY > 0)
 	{
-		//east
 		mlx->step = 1.0 * mlx->textea.height / mlx->lineHeight;
 		mlx->texture = mlx->textea.addr;
 		mlx->text_x = mlx->textea.text_x;
@@ -114,7 +113,6 @@ void	select_texture(t_mlx *mlx)
 	}
 	else if (mlx->side == 1 && mlx->rayDirY < 0)
 	{
-		//west
 		mlx->step = 1.0 * mlx->textwe.height / mlx->lineHeight;
 		mlx->texture = mlx->textwe.addr;
 		mlx->text_x = mlx->textwe.text_x;
@@ -122,7 +120,6 @@ void	select_texture(t_mlx *mlx)
 	}
 	else if (mlx->side == 0 && mlx->rayDirX > 0)
 	{
-		//sur
 		mlx->step = 1.0 * mlx->textso.height / mlx->lineHeight;
 		mlx->texture = mlx->textso.addr;
 		mlx->text_x = mlx->textso.text_x;
@@ -130,7 +127,6 @@ void	select_texture(t_mlx *mlx)
 	}
 	else
 	{
-		// norte
 		mlx->step = 1.0 * mlx->textno.height / mlx->lineHeight;
 		mlx->texture = mlx->textno.addr;
 		mlx->text_x = mlx->textno.text_x;
@@ -164,8 +160,10 @@ void	draw_all(t_mlx *mlx, int x)
 		mlx->addr_img[4 * (x + n * mlx->s_width) + 1] = (char)mlx->sky.g;
 		mlx->addr_img[4 * (x + n++ * mlx->s_width) + 2] = (char)mlx->sky.r;
 	}
-	//draw_colors(mlx, x);
-	draw_textures(mlx, x);
+	if (mlx->f)
+		draw_colors(mlx, x);
+	else
+		draw_textures(mlx, x);
 	while (mlx->drawEnd < mlx->s_height)
 	{
 		mlx->addr_img[4 * (x + mlx->drawEnd * mlx->s_width)] = (char)mlx->floor.b;

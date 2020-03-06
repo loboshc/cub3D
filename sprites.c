@@ -6,17 +6,17 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 17:59:54 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/04 21:48:51 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:46:26 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void sort_sprites(t_mlx *mlx, int sprite_order[])
+static void sort_sprites(t_mlx *mlx, int *sprite_order)
 {
 	double	distance[mlx->sprite_num];
 	int temp;
-	int disttemp;
+	double disttemp;
 	int i;
 	int j;
 
@@ -28,13 +28,13 @@ static void sort_sprites(t_mlx *mlx, int sprite_order[])
 		mlx->sprite[i].x) + (mlx->player.posY- mlx->sprite[i].y) * (mlx->player.posY -
 		mlx->sprite[i].y));
 	}
-	i = -1;
-	while(++i < mlx->sprite_num)
+	i = 0;
+	while(i < mlx->sprite_num)
 	{
 		j = 0;
-		while(++j < mlx->sprite_num)
+		while (j < mlx->sprite_num)
 		{
-			if (distance[i] < distance[j])
+			if (distance[i] > distance[j])
 			{
 				disttemp = distance[i];
 				distance[i] = distance[j];
@@ -43,7 +43,9 @@ static void sort_sprites(t_mlx *mlx, int sprite_order[])
 				sprite_order[i] = sprite_order[j];
 				sprite_order[j] = temp;
 			}
+			j++;
 		}
+		i++;
 	}
 }
 
@@ -82,7 +84,7 @@ static	void	draw_all_sprites(t_mlx *mlx)
 	{
 		mlx->sprite_calc.textX = (int)(256 * (stripe - (-mlx->sprite_calc.width / 2 + mlx->sprite_calc.screen_x)) * mlx->textsp.width / mlx->sprite_calc.width) / 256;
 		if (mlx->sprite_calc.transY > 0 && stripe > 0 && stripe < mlx->s_width && 
-			mlx->sprite_calc.transY < mlx->zbuffer[stripe])
+			mlx->sprite_calc.transY <= mlx->zbuffer[stripe])
 		{
 			y = mlx->sprite_calc.drawstarty;
 			while (y < mlx->sprite_calc.drawendy)

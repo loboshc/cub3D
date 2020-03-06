@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/03 21:22:18 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/06 16:27:27 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ typedef struct s_mlx
     char    *path_west;
     char    *path_east;
     char    *path_sprite;
+    int f;
     t_player player;
     t_floor  floor;
     t_sky    sky;
