@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:54:56 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/06 13:45:35 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:35:58 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	init_player(char *buf, t_mlx *mlx, int *x, int y)
 		mlx->player.dirY = 0;
 		mlx->player.planoX = 0;
 		mlx->player.planoY = -0.66;
-	}    
+	}
 	init_player2(buf, mlx, x, y);
 }
-

@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/06 16:27:27 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:31:09 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ typedef struct s_mlx
     t_text   textsp;
     t_sprite *sprite;
     t_sprite *sprite_sorted;
-    t_sprite_calc sprite_calc;
+    t_sprite_calc sp_calc;
 }              t_mlx;
 
 void	get_info_map(char *line, t_mlx *mlx, int lastline);
@@ -177,9 +177,15 @@ void	get_color_s(t_mlx *mlx, char *line);
 void	get_textures(t_mlx *mlx, char *line);
 void	get_sprite(t_mlx *mlx, char *line);
 void	textures(t_mlx *mlx);
-void	calculate_textures(t_mlx *mlx);
+void	calculate_textures(t_mlx *mlx, int x);
 void    put_pixel(t_mlx *mlx, int color, int x);
 void	draw_sprites(t_mlx *mlx);
 void    put_pixel_sprite(t_mlx *mlx, int color, int x, int y);
+void	select_texture(t_mlx *mlx);
+void	draw_all(t_mlx *mlx, int x);
+void	calculations_sprites(t_mlx *mlx, int y, int stripe);
+void	calcule_sprite_width(t_mlx *mlx);
+void	calcule_sprite_height(t_mlx *mlx);
+void	sort_sprites(t_mlx *mlx, int *sprite_order);
 
 #endif

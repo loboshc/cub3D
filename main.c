@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/06 16:29:48 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:38:24 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,9 +189,9 @@ int		main(int argc, char **argv)
 	init_mlx(&mlx);
 	textures(&mlx);
 	mlx_loop_hook(mlx.mlx, ft_raycasting , &mlx);
-	mlx_hook(mlx.mlx_window, KEY_PRESS, (1L<<0), key_pressed, &mlx);
-	mlx_hook(mlx.mlx_window, KEY_RELEASE, (1L<<1), key_release, &mlx);
-	mlx_hook(mlx.mlx_window, 17, 0, exit_game, (void*)&mlx);
+	mlx_hook(mlx.mlx_window, KEY_PRESS, (1L << 0), key_pressed, &mlx);
+	mlx_hook(mlx.mlx_window, KEY_RELEASE, (1L << 1), key_release, &mlx);
+	mlx_hook(mlx.mlx_window, 17, 0, exit_game, &mlx);
 	mlx_loop(mlx.mlx);
 	return(0);
 }

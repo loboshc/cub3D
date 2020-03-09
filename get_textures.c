@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:12:27 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/02/24 17:49:25 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:33:10 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	get_texture_south(t_mlx *mlx, char *line)
 	i = 0;
 	if (line[i] == 'S' || line[i] == 'O' || line[i] == ' ')
 		i++;
-	else 
+	else
 		error_exit("Error\nEl mapa no es valido.");
 	if (ft_strchr(line, '.'))
 		mlx->path_south = ft_strdup(ft_strchr(line, '.'));
