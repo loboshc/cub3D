@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/09 19:38:24 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/07 13:12:54 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	get_info(char *argv, t_mlx *mlx)
 
 	if ((fd = open(argv, O_RDONLY)) == -1)
 		error_exit("Error\nEl mapa no existe o no se encuentra");
-	while((lastline = get_next_line(fd, &line)) >= 0)
+	while((lastline = get_next_line(fd, &line)) > EOF)
 	{
 		if (*line == 'R')
 			get_resolution(line, mlx);
@@ -71,7 +71,7 @@ void	get_info(char *argv, t_mlx *mlx)
 			get_color_f(mlx, line);
 		else if (*line == 'C')
 			get_color_s(mlx, line);
-		else if (*line == '1')
+		else if (*line == '1'|| *line == ' ')
 			get_info_map(line, mlx, lastline);
 		else if (ft_isdigit(*line))
 			error_exit("Error\nEl mapa tiene que estar rodeado por muros [1].");
@@ -99,6 +99,25 @@ int		exit_game(t_mlx *mlx)
 	exit(EXIT_SUCCESS);
 }
 
+void	init_value2(t_mlx *mlx)
+{
+	mlx->path_north = NULL;
+	mlx->path_south = NULL;
+	mlx->path_east = NULL;
+	mlx->path_west = NULL;
+	mlx->path_sprite = NULL;
+	mlx->move_speed = 0.039;
+	mlx->sprite_num = 0;
+	mlx->f = 0;
+	mlx->x = 0;
+	mlx->sky.r = 0;
+	mlx->sky.g = 0;
+	mlx->sky.b = 0;
+	mlx->floor.r = 0;
+	mlx->floor.g = 0;
+	mlx->floor.b = 0;
+}
+
 void	init_values(t_mlx *mlx)
 {
 	mlx->cameraX = 0;
@@ -122,14 +141,7 @@ void	init_values(t_mlx *mlx)
 	mlx->move_rl = 0;
 	mlx->m_height = 0;
 	mlx->m_width = 0;
-	mlx->path_north = NULL;
-	mlx->path_south = NULL;
-	mlx->path_east = NULL;
-	mlx->path_west = NULL;
-	mlx->path_sprite = NULL;
-	mlx->move_speed = 0.039;
-	mlx->sprite_num = 0;
-	mlx->f = 0;
+	init_value2(mlx);
 }
 
 int		key_pressed(int key, t_mlx *mlx)

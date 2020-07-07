@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/09 19:31:09 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/02 09:32:16 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ typedef struct s_sprite
 
 typedef struct s_player
 {
-	double posX;//Posicion del jugador 
-    double posY;//Posicion del jugador 
-    double dirX;//Vector de direccion del jugador solo cambiar cuando giras 
-    double dirY;//Vector de direccion del jugador solo cuando giras o rotas
-    double planoX;//para los calculos en 2d
-    double planoY;//para los calculos en 2d
+	double posX;
+    double posY;
+    double dirX;
+    double dirY;
+    double planoX;
+    double planoY;
 }				t_player;
 
 typedef struct s_floor
@@ -153,6 +153,7 @@ typedef struct s_mlx
     char    *path_east;
     char    *path_sprite;
     int f;
+    int x;
     t_player player;
     t_floor  floor;
     t_sky    sky;
