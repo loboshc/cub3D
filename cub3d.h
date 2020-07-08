@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/02 09:32:16 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/08 12:33:41 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct s_mlx
     char    *path_sprite;
     int f;
     int x;
+    int p;
     t_player player;
     t_floor  floor;
     t_sky    sky;
@@ -188,5 +189,14 @@ void	calculations_sprites(t_mlx *mlx, int y, int stripe);
 void	calcule_sprite_width(t_mlx *mlx);
 void	calcule_sprite_height(t_mlx *mlx);
 void	sort_sprites(t_mlx *mlx, int *sprite_order);
+void	check_corners(t_mlx *mlx, int y, int x);
+void    check_rows(t_mlx *mlx, int y, int x);
+void	check_filling(t_mlx *mlx, int y, int x);
+void    check_error_map(t_mlx *mlx);
+void    sprite_fill_map(t_mlx *mlx, int y, int x); 
+void    get_info(char *argv, t_mlx *mlx);
+int		key_pressed(int key, t_mlx *mlx);
+int     key_release(int key, t_mlx *mlx);
+int		exit_game(t_mlx *mlx);
 
 #endif

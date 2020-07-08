@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:05:38 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/05 13:11:23 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/08 12:26:01 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	error_exit(char *s)
 {
+	ft_putstr_fd("Error\n", 1);
 	ft_putstr_fd(s, 1);
+	ft_putstr_fd("\n", 1);
 	exit(EXIT_FAILURE);
 }
 
@@ -52,4 +54,10 @@ void	put_pixel_sprite(t_mlx *mlx, int color, int x, int y)
 		color >>= 8;
 		i++;
 	}
+}
+
+void	sprite_fill_map(t_mlx *mlx, int y, int x)
+{
+	mlx->sprite_num++;
+	mlx->map[y][x] = 0;
 }
