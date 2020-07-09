@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 12:29:22 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/08 12:44:18 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/09 13:40:39 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	get_info(char *argv, t_mlx *mlx)
 			get_color_f(mlx, line);
 		else if (*line == 'C')
 			get_color_s(mlx, line);
-		else if (*line == '1' || *line == ' ')
+		else if (*line == '1' || *line == ' ' || *line == '\0')
 			get_info_map(line, mlx, lastline);
 		else if (ft_isdigit(*line))
 			error_exit("El mapa tiene que estar rodeado por muros [1].");

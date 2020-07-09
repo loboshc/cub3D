@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/08 12:33:41 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/09 10:36:17 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct s_mlx
     int f;
     int x;
     int p;
+    int max_width;
     t_player player;
     t_floor  floor;
     t_sky    sky;

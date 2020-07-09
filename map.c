@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:37:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/08 12:25:55 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/09 13:41:34 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,18 @@
 void	get_size_map(char *line, t_mlx *mlx)
 {
 	int i;
-	int max_width;
 
 	i = 0;
-	max_width = 0;
+	mlx->max_width = 0;
 	mlx->m_height++;
 	while (((line[i] >= 48 && line[i] <= 50) || line[i] == ' ' || line[i] == 'N'
 		|| line[i] == 'S' || line[i] == 'W' || line[i] == 'E') && line[i])
 	{
-		max_width++;
+		mlx->max_width++;
 		i++;
 	}
-	if (max_width > mlx->m_width)
-		mlx->m_width = max_width;
+	if (mlx->max_width > mlx->m_width)
+		mlx->m_width = mlx->max_width;
 	if (line[i] != '\0')
 		error_exit("El mapa no es valido.");
 }
@@ -54,8 +53,7 @@ void	get_info_sprites(t_mlx *mlx, char *buf)
 				sprite_num++;
 			}
 			p++;
-			if (buf[p] != ' ')
-				mlx->x++;
+			mlx->x++;
 		}
 		y++;
 	}
@@ -81,9 +79,13 @@ void	fill_map(t_mlx *mlx, char *buf)
 				mlx->map[y][x] = 4;
 			else if (buf[mlx->p] != ' ' && buf[mlx->p] != '\n')
 				mlx->map[y][x] = buf[mlx->p] - '0';
+			else if (buf[mlx->p] == '\n' && x < mlx->m_width)
+				mlx->map[y][x] = 4;
 			x++;
-			mlx->p++;
+			if (buf[mlx->p] != '\n')
+				mlx->p++;
 		}
+		mlx->p++;
 		y++;
 	}
 	if (mlx->sprite_num > 0)
@@ -107,14 +109,17 @@ void	copy_map(char *line, t_mlx *mlx, int lastline)
 {
 	static char	*buf;
 	char		*temp;
+	char		*temp2;
 	int			i;
 	int			h;
 
 	if (buf == NULL)
 		buf = ft_strdup("");
 	temp = ft_strjoin(buf, line);
+	temp2 = ft_strjoin(temp, "\n");
+	free(temp);
 	free(buf);
-	buf = temp;
+	buf = temp2;
 	if (lastline == 0)
 	{
 		i = 0;
@@ -144,7 +149,7 @@ void	get_info_map(char *line, t_mlx *mlx, int lastline)
 			error_exit("El mapa debe estar cerrado por muros [1].\n");
 		i++;
 	}
-	if (line[mlx->m_width - 1] != ' ' && line[mlx->m_width - 1] != '1')
+	if (line[mlx->max_width - 1] != ' ' && line[mlx->max_width- 1] != '1')
 		error_exit("El mapa debe estar cerrado por muros [1].\n");
 	copy_map(line, mlx, lastline);
 }
