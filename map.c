@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:37:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/09 13:41:34 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/14 13:21:08 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	get_size_map(char *line, t_mlx *mlx)
 		mlx->m_width = mlx->max_width;
 	if (line[i] != '\0')
 		error_exit("El mapa no es valido.");
+	mlx->read_map = 1;
 }
 
 void	get_info_sprites(t_mlx *mlx, char *buf)
@@ -110,8 +111,6 @@ void	copy_map(char *line, t_mlx *mlx, int lastline)
 	static char	*buf;
 	char		*temp;
 	char		*temp2;
-	int			i;
-	int			h;
 
 	if (buf == NULL)
 		buf = ft_strdup("");
@@ -122,15 +121,7 @@ void	copy_map(char *line, t_mlx *mlx, int lastline)
 	buf = temp2;
 	if (lastline == 0)
 	{
-		i = 0;
-		h = mlx->m_height;
-		if ((mlx->map = (int**)ft_calloc(sizeof(int*) * h, 1)) == NULL)
-			error_exit("No se ha podido reservar memeria para el mapa");
-		while (i < mlx->m_height)
-		{
-			mlx->map[i] = (int*)ft_calloc(sizeof(int) * mlx->m_width, 1);
-			i++;
-		}
+		create_map(mlx);
 		fill_map(mlx, (char*)buf);
 		check_error_map(mlx);
 		free_and_null((void*)buf);
@@ -141,15 +132,20 @@ void	get_info_map(char *line, t_mlx *mlx, int lastline)
 {
 	int i;
 
-	get_size_map(line, mlx);
-	i = 0;
-	while ((mlx->m_height == 1 || lastline == 0) && line[i])
+	if (*line != '\0' || lastline == 0)
 	{
-		if (line[i] != '1' && line[i] != ' ')
-			error_exit("El mapa debe estar cerrado por muros [1].\n");
-		i++;
+		get_size_map(line, mlx);
+		i = 0;
+		while ((mlx->m_height == 1 || lastline == 0) && line[i])
+		{
+			if (line[i] != '1' && line[i] != ' ')
+				error_exit("El mapa debe estar cerrado por muros [1].\n");
+			i++;
+		}
+		if (*line != '\0')
+			if (line[mlx->max_width - 1] != ' ' &&
+			line[mlx->max_width - 1] != '1')
+				error_exit("El mapa debe estar cerrado por muros [1].\n");
+		copy_map(line, mlx, lastline);
 	}
-	if (line[mlx->max_width - 1] != ' ' && line[mlx->max_width- 1] != '1')
-		error_exit("El mapa debe estar cerrado por muros [1].\n");
-	copy_map(line, mlx, lastline);
 }

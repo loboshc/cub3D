@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/08 12:42:07 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/14 12:15:43 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void	init_value2(t_mlx *mlx)
 	mlx->floor.r = 0;
 	mlx->floor.g = 0;
 	mlx->floor.b = 0;
+	mlx->read_map = 0;
+	mlx->s_width = 0;
+	mlx->s_height = 0;
 }
 
 void	init_values(t_mlx *mlx)

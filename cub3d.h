@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/09 10:36:17 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/14 13:21:06 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ typedef struct s_mlx
     int x;
     int p;
     int max_width;
+    int read_map;
+    int lastline;
     t_player player;
     t_floor  floor;
     t_sky    sky;
@@ -199,5 +201,6 @@ void    get_info(char *argv, t_mlx *mlx);
 int		key_pressed(int key, t_mlx *mlx);
 int     key_release(int key, t_mlx *mlx);
 int		exit_game(t_mlx *mlx);
+void	create_map(t_mlx *mlx);
 
 #endif
