@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 12:29:22 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/14 13:21:37 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/15 12:02:32 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ void	check_file(t_mlx *mlx, char *line)
 	}
 }
 
+void	get_info_line(t_mlx *mlx, char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	if (line[i] == 'R')
+		get_resolution(line, mlx);
+	else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' ||
+			line[i] == 'E')
+		get_textures(mlx, &line[i]);
+	else if (line[i] == 'F')
+		get_color_f(mlx, line);
+	else if (line[i] == 'C')
+		get_color_s(mlx, line);
+	else if (line[i] == '1' || *line == '\0')
+		get_info_map(line, mlx, mlx->lastline);
+	else if (ft_isdigit(*line))
+		error_exit("El mapa tiene que estar rodeado por muros [1].");
+}
+
 void	create_map(t_mlx *mlx)
 {
 	int i;
@@ -71,25 +93,14 @@ void	create_map(t_mlx *mlx)
 void	get_info(char *argv, t_mlx *mlx)
 {
 	int		fd;
-	char	*line;
+	char	*line; 
 
 	if ((fd = open(argv, O_RDONLY)) == -1)
 		error_exit("El mapa no existe o no se encuentra");
 	while ((mlx->lastline = get_next_line(fd, &line)) > EOF)
 	{
 		check_file(mlx, line);
-		if (*line == 'R')
-			get_resolution(line, mlx);
-		else if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
-			get_textures(mlx, line);
-		else if (*line == 'F')
-			get_color_f(mlx, line);
-		else if (*line == 'C')
-			get_color_s(mlx, line);
-		else if (*line == '1' || *line == ' ' || *line == '\0')
-			get_info_map(line, mlx, mlx->lastline);
-		else if (ft_isdigit(*line))
-			error_exit("El mapa tiene que estar rodeado por muros [1].");
+		get_info_line(mlx, line);
 		free_and_null(line);
 		if (!mlx->lastline)
 			break ;
