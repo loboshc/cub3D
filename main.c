@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/14 12:15:43 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/16 13:30:35 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ int		check_args(int argc, char **argv)
 			exit(EXIT_FAILURE);
 			return (1);
 		}
-		else if (argc == 3)
+		else if (argc == 3 && (ft_strncmp("--save", argv[2],
+				ft_strlen(argv[2])) == 0))
 		{
-			//CONDICION PARA --SAVE
+			printf("entraria la condicion save");
 		}
 	}
 	return (0);
@@ -43,6 +44,8 @@ void	init_mlx(t_mlx *mlx)
 
 void	init_value2(t_mlx *mlx)
 {
+	int i;
+
 	mlx->path_north = NULL;
 	mlx->path_south = NULL;
 	mlx->path_east = NULL;
@@ -61,6 +64,9 @@ void	init_value2(t_mlx *mlx)
 	mlx->read_map = 0;
 	mlx->s_width = 0;
 	mlx->s_height = 0;
+	i = 0;
+	while (i < 100)
+		mlx->max_width[i++] = 0;
 }
 
 void	init_values(t_mlx *mlx)

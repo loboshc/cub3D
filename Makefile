@@ -8,17 +8,17 @@ FLAGS = -lmlx -framework OpenGL -framework AppKit
 all: $(NAME)
 
 $(NAME): $(SRC) cub3d.h
-	gcc libft/libft.a cub3d.h $(SRC) $(FLAGS)
+	gcc libft/libft.a $(SRC) $(FLAGS) -o $(NAME)
 run1: $(NAME)
-	./a.out map.cub
+	./$(NAME) map.cub
 run2: $(NAME)
-	./a.out map2.cub
+	./$(NAME) map2.cub
 run3: $(NAME)
-	./a.out test.cub
+	./$(NAME) test.cub
 run4: $(NAME)
-	./a.out map_test.cub
+	./$(NAME) map_test.cub
 run5: $(NAME)
-	./a.out map2_test.cub
+	./$(NAME) map2_test.cub
 normi:
 	norminette $(SRC)
 debug:

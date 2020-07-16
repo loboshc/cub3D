@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 20:46:32 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/15 10:09:58 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/16 13:20:56 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	perform_dda(t_mlx *mlx)
 			mlx->mapY += mlx->stepY;
 			mlx->side = 1;
 		}
-		if (mlx->map[mlx->mapY][mlx->mapX] > 0)
+		if (mlx->map[mlx->mapY][mlx->mapX] == 1)
 			mlx->hit = 1;
 	}
 	if (mlx->side == 0)

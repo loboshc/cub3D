@@ -4,3 +4,4 @@ a.out.dSYM
 .vscode/
 .DS_Store
 cub3d.h.gch
+cub3d

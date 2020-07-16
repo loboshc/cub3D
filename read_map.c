@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 12:29:22 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/15 12:02:32 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/16 13:22:52 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	create_map(t_mlx *mlx)
 void	get_info(char *argv, t_mlx *mlx)
 {
 	int		fd;
-	char	*line; 
+	char	*line;
 
 	if ((fd = open(argv, O_RDONLY)) == -1)
 		error_exit("El mapa no existe o no se encuentra");

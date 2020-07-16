@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:05:38 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/08 12:26:01 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/16 13:21:12 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ void	put_pixel_sprite(t_mlx *mlx, int color, int x, int y)
 void	sprite_fill_map(t_mlx *mlx, int y, int x)
 {
 	mlx->sprite_num++;
-	mlx->map[y][x] = 0;
+	mlx->map[y][x] = 2;
 }
