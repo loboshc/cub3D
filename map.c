@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:37:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/16 13:25:09 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/17 13:32:27 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,48 +62,30 @@ void	get_info_sprites(t_mlx *mlx, char *buf)
 
 void	fill_map(t_mlx *mlx, char *buf)
 {
-	int x;
-	int y;
-
-	y = 0;
-	mlx->p = 0;
-	while (y < mlx->m_height)
+	while (mlx->m_y < mlx->m_height)
 	{
-		x = 0;
-		while (x < mlx->m_width)
+		mlx->m_x = 0;
+		while (mlx->m_x < mlx->m_width)
 		{
 			if (ft_isalpha(buf[mlx->p]))
-				init_player(&buf[mlx->p], mlx, &x, y);
+				init_player(&buf[mlx->p], mlx, &mlx->m_x, mlx->m_y);
 			else if (buf[mlx->p] == '2')
-				sprite_fill_map(mlx, y, x);
+				sprite_fill_map(mlx, mlx->m_y, mlx->m_x);
 			else if (buf[mlx->p] == ' ')
-				mlx->map[y][x] = 4;
+				mlx->map[mlx->m_y][mlx->m_x] = 4;
 			else if (buf[mlx->p] != ' ' && buf[mlx->p] != '\n')
-				mlx->map[y][x] = buf[mlx->p] - '0';
-			else if (buf[mlx->p] == '\n' && x < mlx->m_width)
-				mlx->map[y][x] = 4;
-			x++;
+				mlx->map[mlx->m_y][mlx->m_x] = buf[mlx->p] - '0';
+			else if (buf[mlx->p] == '\n' && mlx->m_x < mlx->m_width)
+				mlx->map[mlx->m_y][mlx->m_x] = 4;
+			mlx->m_x++;
 			if (buf[mlx->p] != '\n')
 				mlx->p++;
 		}
 		mlx->p++;
-		y++;
+		mlx->m_y++;
 	}
 	if (mlx->sprite_num > 0)
 		get_info_sprites(mlx, buf);
-	//pintar el mapa en la consola BORRAR
-	y = 0;
-	while (y < mlx->m_height)
-	{
-		x = 0;
-		while (x < mlx->m_width)
-		{
-			printf("%d", mlx->map[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
 }
 
 void	copy_map(char *line, t_mlx *mlx, int lastline)

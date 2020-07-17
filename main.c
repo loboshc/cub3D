@@ -6,13 +6,13 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/16 13:30:35 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/17 13:26:16 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		check_args(int argc, char **argv)
+int		check_args(int argc, char **argv, t_mlx *mlx)
 {
 	if (argc != 2)
 	{
@@ -25,8 +25,16 @@ int		check_args(int argc, char **argv)
 		else if (argc == 3 && (ft_strncmp("--save", argv[2],
 				ft_strlen(argv[2])) == 0))
 		{
-			printf("entraria la condicion save");
+			init_values(mlx);
+			get_info(argv[1], mlx);
+			mlx->zbuffer = (double*)malloc(sizeof(double) * mlx->s_width);
+			init_mlx(mlx);
+			textures(mlx);
+			ft_raycasting(mlx);
+			ft_screen_shot(mlx);
 		}
+		else
+			error_exit("Argumento invalido.");
 	}
 	return (0);
 }
@@ -64,6 +72,8 @@ void	init_value2(t_mlx *mlx)
 	mlx->read_map = 0;
 	mlx->s_width = 0;
 	mlx->s_height = 0;
+	mlx->p = 0;
+	mlx->m_y = 0;
 	i = 0;
 	while (i < 100)
 		mlx->max_width[i++] = 0;
@@ -99,7 +109,7 @@ int		main(int argc, char **argv)
 {
 	t_mlx mlx;
 
-	check_args(argc, argv);
+	check_args(argc, argv, &mlx);
 	init_values(&mlx);
 	get_info(argv[1], &mlx);
 	mlx.zbuffer = (double*)malloc(sizeof(double) * mlx.s_width);
