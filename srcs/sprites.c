@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 17:59:54 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/03/09 19:31:34 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/20 11:27:12 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	calcule_sprite_width(t_mlx *mlx)
 		mlx->sp_calc.drawendx = mlx->s_width - 1;
 }
 
-void	calculations_sprites(t_mlx *mlx, int y, int stripe)
+void	calculations_sprites(t_mlx *mlx, int y)
 {
 	mlx->sp_calc.d = (y) * 256 - mlx->s_height * 128 +
 	mlx->sp_calc.height * 128;

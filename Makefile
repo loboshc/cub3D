@@ -1,14 +1,20 @@
 NAME = cub3d
 
-SRC = main.c init_player.c map.c utils.c raycasting.c move.c get_info.c get_textures.c textures.c sprites.c textures2.c\
-		draw.c draw_sprites.c check_map.c check_error_map.c read_map.c keys.c ft_screenshot.c
+SRC = srcs/main.c srcs/init_player.c srcs/map.c srcs/utils.c srcs/raycasting.c srcs/move.c srcs/get_info.c srcs/get_textures.c srcs/textures.c srcs/sprites.c srcs/textures2.c\
+		srcs/draw.c srcs/draw_sprites.c srcs/check_map.c srcs/check_error_map.c srcs/read_map.c srcs/keys.c srcs/ft_screenshot.c
 
+OBJS  = $(SRC:.c=.o)
+
+CC = gcc
+
+CFLAGS = -W -Wall -Wextra -Werror -I minilibx -I headers -I libft
 FLAGS = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
-
-$(NAME): $(SRC) cub3d.h
-	gcc libft/libft.a $(SRC) $(FLAGS) -o $(NAME)
+make_libft:
+	@make -C libft/
+$(NAME): make_libft $(OBJS) 
+	$(CC) $(CFLAGS) $(FLAGS) $(OBJS) libft/libft.a -o $(NAME)
 run1: $(NAME)
 	./$(NAME) map.cub
 run2: $(NAME)
@@ -22,4 +28,11 @@ run5: $(NAME)
 normi:
 	norminette $(SRC)
 debug:
-	gcc libft/libft.a cub3d.h $(SRC) $(FLAGS) -g
+	$(CC) $(CFLAGS) $(FLAGS) $(SRC) libft/libft.a -g
+clean:
+	@rm srcs/*.o
+	@make clean -C libft/
+fclean: clean
+	@rm $(NAME)
+	@make fclean -C libft/
+re : fclean all

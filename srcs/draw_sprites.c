@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 19:28:44 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/16 12:23:34 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/20 11:27:47 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_all_sprites(t_mlx *mlx)
 			y = mlx->sp_calc.drawstarty;
 			while (y < mlx->sp_calc.drawendy)
 			{
-				calculations_sprites(mlx, y, stripe);
+				calculations_sprites(mlx, y);
 				if ((mlx->sp_calc.color & 0x00FFFFFF) != 0)
 					put_pixel_sprite(mlx, mlx->sp_calc.color, stripe, y);
 				y++;

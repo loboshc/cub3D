@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:12:27 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/15 10:43:57 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/20 11:25:51 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	get_texture_east(t_mlx *mlx, char *line)
 {
 	int i;
 
+	i = 0;
 	while (line[i] != '\n')
 	{
 		if (line[i] == 'E' || line[i] == 'A' || line[i] == ' ')

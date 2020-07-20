@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/17 13:29:47 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/20 11:27:31 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "minilibx/mlx.h"
-# include "libft/libft.h"
+# include "mlx.h"
+# include "libft.h"
 # include "sys/stat.h"
 # include <math.h>
 # define ROT_SPEED 0.0445
@@ -192,7 +192,7 @@ void	draw_sprites(t_mlx *mlx);
 void    put_pixel_sprite(t_mlx *mlx, int color, int x, int y);
 void	select_texture(t_mlx *mlx);
 void	draw_all(t_mlx *mlx, int x);
-void	calculations_sprites(t_mlx *mlx, int y, int stripe);
+void	calculations_sprites(t_mlx *mlx, int y);
 void	calcule_sprite_width(t_mlx *mlx);
 void	calcule_sprite_height(t_mlx *mlx);
 void	sort_sprites(t_mlx *mlx, int *sprite_order);

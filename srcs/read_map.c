@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 12:29:22 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/16 13:22:52 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/20 12:46:55 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	get_resolution(char *line, t_mlx *mlx)
 	}
 }
 
-void	check_file(t_mlx *mlx, char *line)
+void	check_file(t_mlx *mlx)
 {
 	if (mlx->read_map == 1)
 	{
@@ -94,16 +94,19 @@ void	get_info(char *argv, t_mlx *mlx)
 {
 	int		fd;
 	char	*line;
+	char	*addr;
 
-	if ((fd = open(argv, O_RDONLY)) == -1)
-		error_exit("El mapa no existe o no se encuentra");
+	addr = ft_strjoin("maps/", argv);
+	if ((fd = open(addr, O_RDONLY)) == -1)
+		error_exit("El mapa no está en la carpeta maps");
 	while ((mlx->lastline = get_next_line(fd, &line)) > EOF)
 	{
-		check_file(mlx, line);
+		check_file(mlx);
 		get_info_line(mlx, line);
 		free_and_null(line);
 		if (!mlx->lastline)
 			break ;
 	}
+	free(addr);
 	close(fd);
 }
