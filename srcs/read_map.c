@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 12:29:22 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/20 12:46:55 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/21 13:39:43 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@ void	get_resolution(char *line, t_mlx *mlx)
 	i = 0;
 	while (line[i] == 'R' || line[i] == ' ')
 		i++;
+	if (mlx->s_width != 0)
+		error_exit("Mapa invalido.");
 	while (ft_isdigit(line[i]))
 	{
 		mlx->s_width = mlx->s_width * 10 + line[i] - '0';
 		i++;
 	}
+	if (mlx->s_width > 2560)
+		mlx->s_width = 2560;
 	while (line[i] == ' ')
 		i++;
 	while (ft_isdigit(line[i]))
@@ -31,6 +35,8 @@ void	get_resolution(char *line, t_mlx *mlx)
 		mlx->s_height = mlx->s_height * 10 + line[i] - '0';
 		i++;
 	}
+	if (mlx->s_height > 1395)
+		mlx->s_height = 1395;
 }
 
 void	check_file(t_mlx *mlx)
@@ -72,6 +78,8 @@ void	get_info_line(t_mlx *mlx, char *line)
 		get_info_map(line, mlx, mlx->lastline);
 	else if (ft_isdigit(*line))
 		error_exit("El mapa tiene que estar rodeado por muros [1].");
+	else
+		error_exit("Mapa Invalido.");
 }
 
 void	create_map(t_mlx *mlx)
@@ -107,6 +115,10 @@ void	get_info(char *argv, t_mlx *mlx)
 		if (!mlx->lastline)
 			break ;
 	}
+	if (mlx->floor.r > 255 || mlx->floor.g > 255 || mlx->floor.b > 255)
+		error_exit("Colores del suelo invalidos.");
+	if (mlx->sky.r > 255 || mlx->sky.g > 255 || mlx->sky.b > 255)
+		error_exit("Colores del cielo invalidos");
 	free(addr);
 	close(fd);
 }

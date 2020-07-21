@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:06:42 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/20 11:27:31 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/21 13:10:21 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define KEY_D 2
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define MOVE_SPEED 0.089
 
 
 typedef struct s_sprite
@@ -162,6 +163,7 @@ typedef struct s_mlx
     int sp_num;
     int m_x;
     int m_y;
+    int i;
     t_player player;
     t_floor  floor;
     t_sky    sky;

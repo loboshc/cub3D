@@ -1,11 +1,11 @@
-NAME = cub3d
+NAME = cub3D
 
 SRC = srcs/main.c srcs/init_player.c srcs/map.c srcs/utils.c srcs/raycasting.c srcs/move.c srcs/get_info.c srcs/get_textures.c srcs/textures.c srcs/sprites.c srcs/textures2.c\
 		srcs/draw.c srcs/draw_sprites.c srcs/check_map.c srcs/check_error_map.c srcs/read_map.c srcs/keys.c srcs/ft_screenshot.c
 
 OBJS  = $(SRC:.c=.o)
 
-CC = gcc
+CC = @gcc
 
 CFLAGS = -W -Wall -Wextra -Werror -I minilibx -I headers -I libft
 FLAGS = -lmlx -framework OpenGL -framework AppKit

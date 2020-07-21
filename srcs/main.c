@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/20 11:10:01 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/21 13:10:04 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_value2(t_mlx *mlx)
 	mlx->path_east = NULL;
 	mlx->path_west = NULL;
 	mlx->path_sprite = NULL;
-	mlx->move_speed = 0.039;
+	mlx->move_speed = MOVE_SPEED;
 	mlx->sprite_num = 0;
 	mlx->f = 0;
 	mlx->x = 0;

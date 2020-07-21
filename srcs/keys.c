@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 12:32:11 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/20 10:35:27 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/21 13:07:08 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	key_pressed(int key, t_mlx *mlx)
 	if (key == KEY_D)
 		mlx->move_d = 1;
 	if (key == 257)
-		mlx->move_speed = 0.089;
+		mlx->move_speed = MOVE_SPEED + 0.05;
 	if (key == 3)
 	{
 		if (mlx->f == 0)
@@ -65,6 +65,6 @@ int	key_release(int key, t_mlx *mlx)
 	if (key == KEY_D)
 		mlx->move_d = 0;
 	if (key == 257)
-		mlx->move_speed = 0.039;
+		mlx->move_speed = MOVE_SPEED;
 	return (0);
 }
