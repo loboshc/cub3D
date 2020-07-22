@@ -7,7 +7,7 @@ OBJS  = $(SRC:.c=.o)
 
 CC = @gcc
 
-CFLAGS = -W -Wall -Wextra -Werror -I minilibx -I headers -I libft
+CFLAGS = -W -Wall -Wextra -Werror -I headers -I libft
 FLAGS = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
@@ -15,15 +15,15 @@ make_libft:
 	@make -C libft/
 $(NAME): make_libft $(OBJS) 
 	$(CC) $(CFLAGS) $(FLAGS) $(OBJS) libft/libft.a -o $(NAME)
-run1: $(NAME)
+run1:
 	./$(NAME) map.cub
-run2: $(NAME)
+run2:
 	./$(NAME) map2.cub
-run3: $(NAME)
+run3:
 	./$(NAME) test.cub
-run4: $(NAME)
+run4:
 	./$(NAME) map_test.cub
-run5: $(NAME)
+run5:
 	./$(NAME) map2_test.cub
 normi:
 	norminette $(SRC)

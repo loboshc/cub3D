@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 12:29:22 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/21 13:39:43 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/22 11:43:12 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	get_info_line(t_mlx *mlx, char *line)
 	int i;
 
 	i = 0;
+	mlx->i = 0;
 	while (line[i] == ' ')
 		i++;
 	if (line[i] == 'R')

@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:30:34 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/21 12:50:29 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/22 11:43:06 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	get_color_f(t_mlx *mlx, char *line)
 {
-	mlx->i = 0;
-	if (mlx->floor.r != 0 || mlx->floor.g != 0 || mlx->floor.b != 0)
+	if (mlx->floor.r != 0 || mlx->floor.g != 0 || mlx->floor.b != 0 ||
+		(ft_strchr(line, '-') != NULL))
 		error_exit("Mapa Invalido.");
 	while (line[mlx->i] == 'F' || line[mlx->i] == ' ')
 		mlx->i++;
@@ -38,12 +38,13 @@ void	get_color_f(t_mlx *mlx, char *line)
 		mlx->floor.b = mlx->floor.b * 10 + line[mlx->i] - '0';
 		mlx->i++;
 	}
+	ft_isdigit(line[mlx->i]) || line[mlx->i] == '\0' ? 0 : error_exit("Suelo.");
 }
 
 void	get_color_s(t_mlx *mlx, char *line)
 {
-	mlx->i = 0;
-	if (mlx->sky.r != 0 || mlx->sky.g != 0 || mlx->sky.b != 0)
+	if (mlx->sky.r != 0 || mlx->sky.g != 0 || mlx->sky.b != 0 ||
+		(ft_strchr(line, '-') != NULL))
 		error_exit("Mapa Invalido.");
 	while (line[mlx->i] == 'C' || line[mlx->i] == ' ')
 		mlx->i++;
@@ -66,6 +67,7 @@ void	get_color_s(t_mlx *mlx, char *line)
 		mlx->sky.b = mlx->sky.b * 10 + line[mlx->i] - '0';
 		mlx->i++;
 	}
+	ft_isdigit(line[mlx->i]) || line[mlx->i] == '\0' ? 0 : error_exit("Cielo.");
 }
 
 void	get_sprite(t_mlx *mlx, char *line)

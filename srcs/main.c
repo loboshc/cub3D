@@ -6,7 +6,7 @@
 /*   By: dlobos-m <dlobos-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:17:36 by dlobos-m          #+#    #+#             */
-/*   Updated: 2020/07/21 13:10:04 by dlobos-m         ###   ########.fr       */
+/*   Updated: 2020/07/22 10:13:20 by dlobos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		check_args(int argc, char **argv, t_mlx *mlx)
 		else
 			error_exit("Argumento invalido.");
 	}
+	else if ((ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) == NULL)
+		error_exit("El mapa debe tener la extension [.cub].");
 	return (0);
 }
 
